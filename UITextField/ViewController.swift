@@ -8,15 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITextFieldDelegate {//UITextField의 델리게이트를 사용하기위해 UITextFieldDelegate사용
+//UITextField의 델리게이트를 사용하기위해 UITextFieldDelegate사용
+class ViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var hello: UILabel!
     @IBOutlet weak var textField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //textField.delegate = self //델리 게이트 연결
         // Do any additional setup after loading the view, typically from a nib.
-        
+        textField.delegate = self //델리 게이트 연결
         textField.clearButtonMode = UITextFieldViewMode.always
         textField.placeholder = "입력하세요!"
     }
@@ -46,8 +47,12 @@ class ViewController: UIViewController,UITextFieldDelegate {//UITextField의 델
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         view.backgroundColor = UIColor.yellow
-        //textField.resignFirstResponder()
         return true
+    }
+    
+    // if implemented, called in place of textFieldDidEndEditing:
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        view.backgroundColor = UIColor.green
     }
 
 }
